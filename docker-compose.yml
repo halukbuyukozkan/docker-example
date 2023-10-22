@@ -42,5 +42,14 @@ services:
         ports:
             - 6379:6379
 
+    node:
+        build:
+            context: .
+            target: node
+        volumes:
+            - ./:/usr/src
+            - ./node_modules:/usr/src/node_modules
+        tty: true
+
 volumes:
     db_data: ~

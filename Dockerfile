@@ -17,3 +17,16 @@ COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
 # we will use port variable in entrypoint.sh
 ENV PORT=8000
 ENTRYPOINT [ "docker/entrypoint.sh" ]
+
+# ====================
+# node
+
+FROM node:16-alpine as node
+
+WORKDIR /var/www
+COPY . .
+
+RUN npm install --global cross-env
+RUN npm install
+
+VOLUME /var/www/node_modules
